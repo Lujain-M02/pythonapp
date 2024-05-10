@@ -201,9 +201,9 @@ def calculate_topsis():
         normalized_sums = [(raw_sum - min_sum) / range_sum if range_sum > 0 else 0 for raw_sum in raw_sums]  # Normalize raw sums
 
         # Print the normalized dissimilarity matrix
-        print("Normalized Dissimilarity Matrix:")
-        for row in normalized_sums:
-            print(row)
+        #print("Normalized Dissimilarity Matrix:")
+        #for row in normalized_sums:
+            #print(row)
 
         for (filtered_sentence, original_sentence) in zip(filtered_sentences, original_sentences):
             clauses = sentence_tokenize(filtered_sentence)  # Tokenize the sentence into clauses  
@@ -233,16 +233,16 @@ def calculate_topsis():
                     overall_score = title_word_score + sentiment_score + noun_weight + dissimilarity_score + pos_score + normalized_length  # Calculate the overall score for the clause
                     clause_scores[clause] = overall_score  # Store the overall score in the dictionary
                     scores_matrix.append([sentiment_score, title_word_score, noun_weight, dissimilarity_score, pos_score, normalized_length])  # Append scores to the matrix
-                    print(f"----------------------------------------------------")
-                    print(f"Clause: {clause}")
-                    print(f"Title Word Score: {title_word_score}")
-                    print(f"Sentiment Score: {sentiment_score}")
-                    print(f"Noun Weight: {noun_weight}")
-                    print(f"Dissimilarity Score: {dissimilarity_score}")
-                    print(f"POS Score: {pos_score}")
-                    print(f"Normalized Length Score: {normalized_length}")
-                    print(f"Overall Score for Clause: {clause}: {overall_score}")
-                    print(f"----------------------------------------------------")
+                    # print(f"----------------------------------------------------")
+                    # print(f"Clause: {clause}")
+                    # print(f"Title Word Score: {title_word_score}")
+                    # print(f"Sentiment Score: {sentiment_score}")
+                    # print(f"Noun Weight: {noun_weight}")
+                    # print(f"Dissimilarity Score: {dissimilarity_score}")
+                    # print(f"POS Score: {pos_score}")
+                    # print(f"Normalized Length Score: {normalized_length}")
+                    # print(f"Overall Score for Clause: {clause}: {overall_score}")
+                    # print(f"----------------------------------------------------")
 
         return scores_matrix, clause_scores  # Return the scores matrix and clause scores as results
     
@@ -295,7 +295,7 @@ def calculate_topsis():
     def calculate_relative_closeness(positive_separation, negative_separation):
         relative_closeness = negative_separation / (positive_separation + negative_separation)
 
-        print(f"relative_closeness :\n {relative_closeness} \n")
+        # print(f"relative_closeness :\n {relative_closeness} \n")
 
         return relative_closeness
 
@@ -376,7 +376,7 @@ def calculate_topsis():
     # Remove tashkeel (diacritics) from the 'story' and 'title'
     filtered_story = strip_tashkeel(filtered_story)
     filtered_title = strip_tashkeel(filtered_title)
-    print(filtered_story)
+    # print(filtered_story)
 
     # Calculate clause scores for the Arabic 'story' and 'title'
     scores_matrix, clause_scores = calculate_clause_scores_arabic(filtered_story, filtered_title, story)
@@ -410,4 +410,5 @@ def calculate_topsis():
     return jsonify(sentences_with_topsis)
 
 if __name__ == '__main__':
-    app.run(host='192.168.100.4', debug=True)
+    app.run(debug=False)
+    # app.run(host='192.168.100.4', debug=True)
